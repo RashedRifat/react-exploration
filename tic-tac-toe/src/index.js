@@ -106,6 +106,10 @@ function Square(props) {
         } else {
             status = "Next Player: " + (this.state.xIsNext ? "X" : "O")
         }
+
+        if (isTie(current.squares)) {
+            status = "Tie!"
+        }
         
       return (
         <div className="game">
@@ -142,6 +146,15 @@ function Square(props) {
       }
     }
     return null;
+  }
+
+  function isTie(squares) {
+
+    const count = squares.reduce((total, current) => {
+        return current ? total + 1 : total; 
+    }, 0); 
+
+    return count === 9; 
   }
 
   // ========================================
